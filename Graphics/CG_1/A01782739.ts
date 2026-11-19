@@ -6,6 +6,7 @@ Gonzalo Zamarrón Orrantia
 'use strict';
 
 import * as twgl from 'twgl-base.js';
+import { type Color } from '../libs/color.js';
 import GUI from 'lil-gui';
 import { diamond } from '../libs/shapes.js';
 import { V2, M3, type Vec2, type Mat3 } from '../libs/2d-lib.js';
@@ -192,6 +193,13 @@ class BallScene extends Scene {
         const scaFolder = modelFolder.addFolder('Scale');
         scaFolder.add(model.transforms.s, 'x', -5, 5);
         scaFolder.add(model.transforms.s, 'y', -5, 5);
+
+        // color igual que en 08_smiley
+        const colorFolder = modelFolder.addFolder('Color');
+        colorFolder.addColor(model, 'color')
+            .onChange((value: Color) => {
+                model.color = value;
+            });
 
         const pivotFolder = gui.addFolder('Pivot');
         const pivotTraFolder = pivotFolder.addFolder('Translation');
